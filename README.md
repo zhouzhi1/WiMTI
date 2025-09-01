@@ -23,15 +23,16 @@ Each sample contains a CSI sequence captured with an Intel 5300 NIC and annotate
 ---
 
 ## 📂 Dataset Structure
-
 - **Format**: Raw CSI data in `.dat` format  
 - **Collection setup**: Intel 5300 NIC + Linux 802.11n CSI Tool  
-- **CSI content**: Each `.dat` file contains a time series of complex CSI frames, typically shaped as:T × 30 × A
+- **CSI content**: Each `.dat` file contains a time series of complex CSI frames, typically shaped as: T × 30 × Tx × Rx  
 
 where:
 - `T` = number of time frames  
 - `30` = subcarriers  
-- `A` = number of antennas (A ≥ 2)
+- `Tx` = number of transmit antennas  
+- `Rx` = number of receive antennas  
+
 
 - **Directory layout**:
 dataset_raw/
