@@ -35,17 +35,18 @@ where:
 
 
 - **Directory layout**:
-dataset_raw/
-body/
-kyphosis/
-cyc-k013.dat
-normal/
-abc-n001.dat
-scoliosis/
-zzy-s042.dat
+dataset_raw/  
+└── body/  
+    ├── kyphosis/  
+    │   └── cyc-k013.dat  
+    ├── normal/  
+    │   └── abc-n001.dat  
+    └── scoliosis/  
+        └── zzy-s042.dat  
+
 
 - **File naming**:  
-<identity>-<posture_code><index>.dat
+`<identity>-<posture_code><index>.dat`
 - `identity`: subject code (e.g., `cyc`)  
 - `posture_code`: `k` = kyphosis, `n` = normal, `s` = scoliosis  
 - `index`: sample number (e.g., `013`)
@@ -70,7 +71,7 @@ We recommend using [CSIKit](https://github.com/Gi-z/CSIKit) for parsing `.dat` f
 
 ### Steps:
 1. **Read CSI**  
- Use `IWLBeamformReader` to parse `.dat` into a `(T, 30, A)` complex array.
+ Use `IWLBeamformReader` to parse `.dat` into a `(T, 30, Tx , Rx )` complex array.
 2. **Feature extraction**  
  - Compute complex ratio: `ratio = H_a2 / (H_a1 + ε)`  
  - Amplitude: `abs(ratio)`  
@@ -79,7 +80,7 @@ We recommend using [CSIKit](https://github.com/Gi-z/CSIKit) for parsing `.dat` f
 3. **Windowing**  
  Slice into fixed-length segments (e.g., length = 300, hop = 100)
 4. **Save**  
- Store each segment as `.npz` with key `csi`, shape `(300, 60)`  
+ Store each segment as `.npz` with key `csi`, shape `(300, 60, 3)`  
  Organize into `train/val/test` directories by posture
 
 ---
